@@ -8,7 +8,7 @@ import com.example.administrator.imovie.models.MovieDetail;
 import com.example.administrator.imovie.models.MovieImageAll;
 import com.example.administrator.imovie.models.ShowingMovie;
 import com.example.administrator.imovie.models.TodayNewsKeyword;
-import com.example.administrator.imovie.models.TouTiaoVideoOriginalData;
+import com.example.administrator.imovie.models.YGMovieOriginalData;
 import com.example.administrator.imovie.models.TrailerData;
 import com.example.administrator.imovie.models.XiGuaMovieOriginalData;
 
@@ -108,13 +108,13 @@ public interface IMovieService {
 
 
     @GET("feed/")
-    Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMaxBehotTime(
+    Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(
             @Query("max_behot_time") String max_behot_time,
             @Query("category") String category
     );
 
     @GET("feed/")
-    Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMinBehotTime(
+    Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime(
             @Query("min_behot_time") String min_behot_time,
             @Query("category") String category
     );

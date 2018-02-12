@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.administrator.imovie.models.TouTiaoVideoData;
+import com.example.administrator.imovie.models.YGMovieData;
+
 import java.util.List;
 
 /**
@@ -15,8 +17,7 @@ import java.util.List;
  */
 
 public class VideoRecyclerView extends RecyclerView {
-//    private List<XiGuaMovieData> mXiGuaMovieDatas ;
-    private List<TouTiaoVideoData> mTouTiaoVideoDatas ;
+    private List<YGMovieData> mYGMovieData ;
     private VideoAdapter adapter;
     private String mClassName ;
     public VideoRecyclerView(Context context) {
@@ -48,17 +49,8 @@ public class VideoRecyclerView extends RecyclerView {
         this.mClassName = mClassName;
     }
 
-    //    public void bindData(List<XiGuaMovieData> mXiGuaMovieDatas){
-//        this.mXiGuaMovieDatas = mXiGuaMovieDatas ;
-//        if (adapter == null){
-//            adapter = new VideoAdapter();
-//            setAdapter(adapter);
-//        }else adapter.notifyDataSetChanged();
-//    }
-
-
-    public void bindData(List<TouTiaoVideoData> mTouTiaoVideoDatas){
-        this.mTouTiaoVideoDatas = mTouTiaoVideoDatas ;
+    public void bindData(List<YGMovieData> mYGMovieData){
+        this.mYGMovieData = mYGMovieData ;
         if (adapter == null){
             adapter = new VideoAdapter();
             setAdapter(adapter);
@@ -77,12 +69,12 @@ public class VideoRecyclerView extends RecyclerView {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ((VideoListCard)holder.itemView).setmClassName(mClassName);
-            ((VideoListCard)holder.itemView).bindData(mTouTiaoVideoDatas.get(position));
+            ((VideoListCard)holder.itemView).bindData(mYGMovieData.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return mTouTiaoVideoDatas.size();
+            return mYGMovieData.size();
         }
 
         private class TrailerViewHolder extends ViewHolder {

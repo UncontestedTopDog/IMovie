@@ -12,6 +12,7 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.administrator.imovie.comand.HideImageCommand;
 import com.example.administrator.imovie.models.TouTiaoVideoData;
 import com.example.administrator.imovie.R;
+import com.example.administrator.imovie.models.YGMovieData;
 import com.example.administrator.imovie.utils.RxBus;
 import com.example.administrator.imovie.utils.todaynewsvideo.Video;
 import com.example.administrator.imovie.utils.todaynewsvideo.VideoPathDecoder;
@@ -57,14 +58,14 @@ public class VideoListCard extends RelativeLayout {
         mAvatarName = (TextView) findViewById(R.id.avatar_name);
     }
 
-    public boolean bindData(final TouTiaoVideoData mTouTiaoVideoData){
-        if (mTouTiaoVideoData == null)
+    public boolean bindData(final YGMovieData mYGMovieData){
+        if (mYGMovieData == null)
             return false ;
-        mVideoPlayer.setmMediaCreatorId(mTouTiaoVideoData.getGroup_id());
-        if (mTouTiaoVideoData.getPlayer_url() == null)
-            parseUrl(mTouTiaoVideoData);
+        mVideoPlayer.setmMediaCreatorId(mYGMovieData.getGroup_id());
+//        if (mYGMovieData.getPlayer_url() == null)
+//            parseUrl(mYGMovieData);
         Glide.with(getContext())
-                .load(mTouTiaoVideoData.getImage_url())
+                .load(mYGMovieData.getImage_url())
                 .centerCrop()
                 .placeholder(R.drawable.no_pictrue)
                 .error(R.drawable.download_fail_hint)
@@ -76,15 +77,15 @@ public class VideoListCard extends RelativeLayout {
                           }
                       }
                 );
-        Glide.with(getContext()).load(mTouTiaoVideoData.getMedia_avatar_url()).into(mAvatarImage) ;
-        mAvatarName.setText(mTouTiaoVideoData.getSource());
+        Glide.with(getContext()).load(mYGMovieData.getMedia_avatar_url()).into(mAvatarImage) ;
+        mAvatarName.setText(mYGMovieData.getSource());
         mSubscription = RxBus.getDefault().register(HideImageCommand.class, this)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<HideImageCommand>() {
                     @Override
                     public void call(HideImageCommand cmd) {
                         mAvatarImage.setVisibility(VISIBLE);
-                        if (cmd.getMedia_creator_id() ==  mTouTiaoVideoData.getGroup_id())
+                        if (cmd.getMedia_creator_id() ==  mYGMovieData.getGroup_id())
                             mAvatarImage.setVisibility(INVISIBLE);
                     }
                 }, new Action1<Throwable>() {
@@ -96,22 +97,22 @@ public class VideoListCard extends RelativeLayout {
         return true ;
     }
 
-    private void parseUrl(final TouTiaoVideoData mTouTiaoVideoData) {
+    private void parseUrl(final YGMovieData mYGMovieData) {
         //解析地址
         VideoPathDecoder decoder = new VideoPathDecoder() {
             @Override
             public void onSuccess(Video s) {
                 Log.i(TAG,s.toString());
-                mVideoPlayer.setUp(s.main_url, JZVideoPlayer.SCREEN_WINDOW_NORMAL, mTouTiaoVideoData.getTitle(),mTouTiaoVideoData.getVideo_duration_str());
-                mTouTiaoVideoData.setPlayer_url(s.main_url);
+                mVideoPlayer.setUp(s.main_url, JZVideoPlayer.SCREEN_WINDOW_NORMAL, mYGMovieData.getTitle(),0);
+                mYGMovieData.setPlayer_url(s.main_url);
             }
 
             @Override
             public void onDecodeError(Throwable e) {
             }
         };
-        Log.i(TAG,mTouTiaoVideoData.getShare_url());
-        decoder.decodePath(mTouTiaoVideoData.getShare_url());
+        Log.i(TAG,mYGMovieData.getShare_url());
+        decoder.decodePath(mYGMovieData.getShare_url());
     }
 
     public String getmClassName() {

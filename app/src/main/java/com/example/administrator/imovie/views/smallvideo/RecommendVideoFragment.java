@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.administrator.imovie.comand.RotateScreenCommand;
 import com.example.administrator.imovie.models.TouTiaoVideoData;
-import com.example.administrator.imovie.models.TouTiaoVideoOriginalData;
+import com.example.administrator.imovie.models.YGMovieData;
+import com.example.administrator.imovie.models.YGMovieOriginalData;
 import com.example.administrator.imovie.manager.MovieManager;
 import com.example.administrator.imovie.R;
 import com.example.administrator.imovie.utils.RxBus;
@@ -31,10 +32,10 @@ import rx.schedulers.Schedulers;
 
 public class RecommendVideoFragment extends com.trello.rxlifecycle.components.support.RxFragment {
 
-    private static final String TAG = "HomeworkFragment";
+    private static final String TAG = "RecommendVideoFragment";
     private VideoRecyclerView mVideoRecyclerView ;
     private SmartRefreshLayout mSmartRefreshLayout ;
-    List<TouTiaoVideoData> mTouTiaoVideoDatas = new ArrayList<>();
+    List<YGMovieData> mYGMovieDatas = new ArrayList<>();
     private String mMaxBehotTime ;
     private Subscription mSubscription;
 
@@ -89,22 +90,20 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
                 });
     }
 
-
-
     private void getTouTiaoVideoDataByMaxBehotTime(final String maxBehotTime) {
         MovieManager.INSTANCE()
                 .getTouTiaoVideoDataByMaxBehotTime(maxBehotTime)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<TouTiaoVideoOriginalData>() {
+                .subscribe(new Action1<YGMovieOriginalData>() {
                     @Override
-                    public void call(TouTiaoVideoOriginalData touTiaoVideoData) {
-                        for (TouTiaoVideoOriginalData.DataBean dataBean : touTiaoVideoData.getData()){
-                            mTouTiaoVideoDatas.add(new TouTiaoVideoData(dataBean));
+                    public void call(YGMovieOriginalData ygMovieOriginalData) {
+                        for (YGMovieOriginalData.DataBean dataBean : ygMovieOriginalData.getData()){
+                            mYGMovieDatas.add(new YGMovieData(dataBean));
                             Log.i(TAG,dataBean.getTitle());
                         }
-                        mVideoRecyclerView.bindData(mTouTiaoVideoDatas);
-                        mMaxBehotTime = touTiaoVideoData.getNext().getMax_behot_time()+"";
+                        mVideoRecyclerView.bindData(mYGMovieDatas);
+                        mMaxBehotTime = ygMovieOriginalData.getNext().getMax_behot_time()+"";
                         mSmartRefreshLayout.finishLoadmore();
                     }
                 }, new Action1<Throwable>() {
@@ -120,18 +119,18 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
                 .getTouTiaoVideoDataByMinBehotTime()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<TouTiaoVideoOriginalData>() {
+                .subscribe(new Action1<YGMovieOriginalData>() {
                     @Override
-                    public void call(TouTiaoVideoOriginalData touTiaoVideoData) {
-                        mTouTiaoVideoDatas.clear();
-                        Log.i(TAG,"TouTiaoDataSize = "+touTiaoVideoData.getData().size());
-                        if (touTiaoVideoData.getData().size() != 0) {
-                            for (TouTiaoVideoOriginalData.DataBean dataBean : touTiaoVideoData.getData()){
-                                mTouTiaoVideoDatas.add(new TouTiaoVideoData(dataBean));
+                    public void call(YGMovieOriginalData ygMovieOriginalData) {
+                        mYGMovieDatas.clear();
+                        Log.i(TAG,"ygMovieOriginalDataSize = "+ygMovieOriginalData.getData().size());
+                        if (ygMovieOriginalData.getData().size() != 0) {
+                            for (YGMovieOriginalData.DataBean dataBean : ygMovieOriginalData.getData()){
+                                mYGMovieDatas.add(new YGMovieData(dataBean));
                                 Log.i(TAG,dataBean.getTitle());
                             }
-                            mVideoRecyclerView.bindData(mTouTiaoVideoDatas);
-                            mMaxBehotTime = touTiaoVideoData.getNext().getMax_behot_time()+"";
+                            mVideoRecyclerView.bindData(mYGMovieDatas);
+                            mMaxBehotTime = ygMovieOriginalData.getNext().getMax_behot_time()+"";
                             mSmartRefreshLayout.finishRefresh(100);
                         }
                     }

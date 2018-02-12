@@ -8,7 +8,7 @@ import com.example.administrator.imovie.models.MovieDetail;
 import com.example.administrator.imovie.models.MovieImageAll;
 import com.example.administrator.imovie.models.ShowingMovie;
 import com.example.administrator.imovie.models.TodayNewsKeyword;
-import com.example.administrator.imovie.models.TouTiaoVideoOriginalData;
+import com.example.administrator.imovie.models.YGMovieOriginalData;
 import com.example.administrator.imovie.models.TrailerData;
 import com.example.administrator.imovie.models.XiGuaMovieOriginalData;
 import com.example.administrator.imovie.utils.ToStringConverterFactory;
@@ -193,9 +193,9 @@ public class MovieService {
         return retrofit.create(IMovieService.class).getXiGuaMovieOriginalDataByKeyword(format,autoload,count,keyword,cur_tab,offset);
     }
 
-    public static Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMaxBehotTime(String max_behot_time) {
+    public static Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(String max_behot_time) {
 
-        String URL = "https://www.ixigua.com/api/pc/";
+        String URL = "https://365yg.com/api/pc/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -205,16 +205,16 @@ public class MovieService {
         return retrofit.create(IMovieService.class).getTouTiaoVideoDataByMaxBehotTime(max_behot_time,"subv_movie");
     }
 
-    public static Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMinBehotTime() {
+    public static Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime() {
 
-        String URL = "https://www.ixigua.com/api/pc/";
+        String URL = "https://365yg.com/api/pc/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        return retrofit.create(IMovieService.class).getTouTiaoVideoDataByMinBehotTime("0","subv_movie");
+        return retrofit.create(IMovieService.class).getTouTiaoVideoDataByMinBehotTime("0","movie");
     }
 
 }

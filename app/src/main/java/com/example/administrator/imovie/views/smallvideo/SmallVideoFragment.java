@@ -31,7 +31,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
  */
 
 public class SmallVideoFragment extends Fragment {
-    private static final String TAG = "HomeworkFragmentV2";
+    private static final String TAG = "SmallVideoFragment";
     private MagicIndicator mMagicIndicator ;
     private ViewPager mViewPager ;
     private String[] titles = {"推荐","关注"};

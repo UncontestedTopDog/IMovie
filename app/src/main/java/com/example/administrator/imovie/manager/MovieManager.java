@@ -12,7 +12,7 @@ import com.example.administrator.imovie.models.MovieImageAll;
 import com.example.administrator.imovie.models.ShowingMovie;
 import com.example.administrator.imovie.models.TimeMovieId;
 import com.example.administrator.imovie.models.TodayNewsKeyword;
-import com.example.administrator.imovie.models.TouTiaoVideoOriginalData;
+import com.example.administrator.imovie.models.YGMovieOriginalData;
 import com.example.administrator.imovie.models.TrailerData;
 import com.example.administrator.imovie.models.XiGuaMovieOriginalData;
 import com.google.gson.Gson;
@@ -93,11 +93,11 @@ public class MovieManager {
         return MovieService.getXiGuaMovieOriginalDataByKeyword(keyword);
     }
 
-    public Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMaxBehotTime(@NonNull String max_behot_time) {
+    public Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(@NonNull String max_behot_time) {
         return MovieService.getTouTiaoVideoDataByMaxBehotTime(max_behot_time);
     }
 
-    public Observable<TouTiaoVideoOriginalData> getTouTiaoVideoDataByMinBehotTime() {
+    public Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime() {
         return MovieService.getTouTiaoVideoDataByMinBehotTime();
     }
 
