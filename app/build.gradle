@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion target_sdk_version
+    buildToolsVersion build_tools_version
+    defaultConfig {
+        applicationId "com.example.administrator.newmovie"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion '25.0.0'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile lib_support_v4
+    compile lib_recyclerview
+    compile lib_support_annotations
+    compile lib_appcompat_v7
+    compile lib_design
+    compile lib_cardview
+
+    compile (lib_rxjava){ exclude group: 'com.android.support' }
+    compile (lib_rxandroid){ exclude group: 'com.android.support' }
+    compile (lib_rxlifecycle) { exclude group: 'com.android.support' }
+    compile (lib_rxlifecycle_components) { exclude group: 'com.android.support' }
+    compile (lib_rxbinding) { exclude group: 'com.android.support' }
+    compile (lib_okhttp) { exclude group: 'com.android.support' }
+    compile (lib_okhttp_interceptor) { exclude group: 'com.android.support' }
+    compile (lib_retrofit) { exclude group: 'com.android.support' }
+    compile (lib_retrofit_rxjava) { exclude group: 'com.android.support' }
+    compile (lib_retrofit_gson) { exclude group: 'com.android.support' }
+    compile (lib_retrofit_scalars) { exclude group: 'com.android.support' }
+    compile (lib_gson) { exclude group: 'com.android.support' }
+
+    compile lib_glide
+    compile lib_joda_time
+    compile lib_constraint_layout
+    compile lib_fireworkypulltorefresh
+    compile lib_zhy_adapter
+    compile lib_jiaozi_video_player
+    compile lib_zhouwei_mzbanner
+    compile lib_gyf_barlibrary
+    compile lib_youth_banner
+    compile lib_hackware1993_magicindicator
+    compile lib_scwang_smartrefreshlayout
+    compile lib_scwang_smartrefreshheader
+
+}

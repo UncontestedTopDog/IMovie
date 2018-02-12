@@ -1,0 +1,74 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+
+    ext {
+        build_tools_version = "25.0.0"
+
+        min_sdk_version = 16
+
+
+        target_sdk_version = 25
+        android_support_lib_version = "25.+"
+
+
+        lib_support_v4          = "com.android.support:support-v4:$android_support_lib_version"
+        lib_recyclerview        = "com.android.support:recyclerview-v7:$android_support_lib_version"
+        lib_support_annotations = "com.android.support:support-annotations:$android_support_lib_version"
+        lib_appcompat_v7        = "com.android.support:appcompat-v7:$android_support_lib_version"
+        lib_design              = "com.android.support:design:$android_support_lib_version"
+        lib_cardview            = "com.android.support:cardview-v7:$android_support_lib_version"
+
+
+        lib_rxjava                  = "io.reactivex:rxjava:1.1.6"
+        lib_rxandroid               = "io.reactivex:rxandroid:1.2.1"
+        lib_rxlifecycle             = "com.trello:rxlifecycle:0.6.1"
+        lib_rxlifecycle_components  = "com.trello:rxlifecycle-components:0.6.1"
+        lib_rxbinding               = "com.jakewharton.rxbinding:rxbinding:0.4.0"
+        lib_okhttp                  = "com.squareup.okhttp3:okhttp:3.8.1"
+        lib_okhttp_interceptor      = "com.squareup.okhttp3:logging-interceptor:3.1.2"
+        lib_retrofit                = "com.squareup.retrofit2:retrofit:2.2.0"
+        lib_retrofit_rxjava         = "com.squareup.retrofit2:adapter-rxjava:2.1.0"
+        lib_retrofit_gson           = "com.squareup.retrofit2:converter-gson:2.1.0"
+        lib_retrofit_scalars        = "com.squareup.retrofit2:converter-scalars:2.0.2"
+        lib_gson                    = "com.google.code.gson:gson:2.7"
+
+        lib_glide                       = "com.github.bumptech.glide:glide:3.7.0"
+
+        lib_joda_time                   = "joda-time:joda-time:2.9.9"
+
+        lib_constraint_layout           = "com.android.support.constraint:constraint-layout:1.0.2"
+        lib_fireworkypulltorefresh      = "com.cleveroad:fireworkypulltorefresh:1.0.3"
+        lib_zhy_adapter                 = "com.zhy:base-adapter:3.0.3"
+        lib_jiaozi_video_player         = "cn.jzvd:jiaozivideoplayer:6.2.3"
+        lib_zhouwei_mzbanner            = "com.github.pinguo-zhouwei:MZBannerView:v2.0.0"
+        lib_gyf_barlibrary              = "com.gyf.barlibrary:barlibrary:2.3.0"
+        lib_youth_banner                = "com.youth.banner:banner:1.4.10"
+        lib_hackware1993_magicindicator = "com.github.hackware1993:MagicIndicator:1.5.0"
+        lib_scwang_smartrefreshlayout   = "com.scwang.smartrefresh:SmartRefreshLayout:1.0.3"
+        lib_scwang_smartrefreshheader   = "com.scwang.smartrefresh:SmartRefreshHeader:1.0.3"
+
+
+    } //ext
+
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
