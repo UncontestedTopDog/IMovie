@@ -93,46 +93,46 @@ public class TrailerListCard extends RelativeLayout {
         return true ;
     }
 
-    public boolean bindData(XiGuaMovieData mXiGuaMovieData){
-        if (mXiGuaMovieData == null)
-            return false ;
-        parseUrl(mXiGuaMovieData.getShare_url(),mXiGuaMovieData.getVideo_duration_str(),mXiGuaMovieData.getTitle());
+//    public boolean bindData(XiGuaMovieData mXiGuaMovieData){
+//        if (mXiGuaMovieData == null)
+//            return false ;
+//        parseUrl(mXiGuaMovieData.getShare_url(),mXiGuaMovieData.getVideo_duration_str(),mXiGuaMovieData.getTitle());
+//
+//        mTrailerTitle.setText(mXiGuaMovieData.getMedia_name());
+//
+//        Glide.with(getContext()).load(mXiGuaMovieData.getMedia_avatar_url()).into(mRoundImageView);
+//
+//        Glide.with(getContext())
+//                .load(mXiGuaMovieData.getImage_url())
+//                .centerCrop()
+//                .placeholder(R.drawable.no_pictrue)
+//                .error(R.drawable.download_fail_hint)
+//                .crossFade()
+//                .into(new GlideDrawableImageViewTarget(mTrailerPlayer.thumbImageView) {
+//                          @Override
+//                          public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
+//                              super.onResourceReady(drawable, anim);
+//                          }
+//                      }
+//                );
+//
+//        return true ;
+//    }
 
-        mTrailerTitle.setText(mXiGuaMovieData.getMedia_name());
-
-        Glide.with(getContext()).load(mXiGuaMovieData.getMedia_avatar_url()).into(mRoundImageView);
-
-        Glide.with(getContext())
-                .load(mXiGuaMovieData.getImage_url())
-                .centerCrop()
-                .placeholder(R.drawable.no_pictrue)
-                .error(R.drawable.download_fail_hint)
-                .crossFade()
-                .into(new GlideDrawableImageViewTarget(mTrailerPlayer.thumbImageView) {
-                          @Override
-                          public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
-                              super.onResourceReady(drawable, anim);
-                          }
-                      }
-                );
-
-        return true ;
-    }
-
-    private void parseUrl(String url, final String time , final String title) {
-        //解析地址
-        VideoPathDecoder decoder = new VideoPathDecoder() {
-            @Override
-            public void onSuccess(Video s) {
-                Log.i(TAG,s.toString());
-                mTrailerPlayer.setUp(s.main_url, JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, title, time);
-            }
-
-            @Override
-            public void onDecodeError(Throwable e) {
-            }
-        };
-        Log.i(TAG,url);
-        decoder.decodePath(url);
-    }
+//    private void parseUrl(String url, final String time , final String title) {
+//        //解析地址
+//        VideoPathDecoder decoder = new VideoPathDecoder() {
+//            @Override
+//            public void onSuccess(Video video) {
+//                Log.i(TAG,video.toString());
+//                mTrailerPlayer.setUp(video.getMain_url(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, title, time);
+//            }
+//
+//            @Override
+//            public void onDecodeError(Throwable e) {
+//            }
+//        };
+//        Log.i(TAG,url);
+//        decoder.decodePath(url);
+//    }
 }

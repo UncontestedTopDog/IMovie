@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.administrator.imovie.comand.RotateScreenCommand;
-import com.example.administrator.imovie.models.TouTiaoVideoData;
 import com.example.administrator.imovie.models.YGMovieData;
 import com.example.administrator.imovie.models.YGMovieOriginalData;
 import com.example.administrator.imovie.manager.MovieManager;
@@ -45,7 +44,7 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.recommend_video_fragment,container,false);
         initView(view);
-        getTouTiaoVideoDataByMinBehotTime();
+        getYGVideoDataByMinBehotTime();
         return view;
     }
 
@@ -56,7 +55,7 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
         mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                getTouTiaoVideoDataByMinBehotTime();
+                getYGVideoDataByMinBehotTime();
                 Log.i(TAG,mMaxBehotTime);
             }
         });
@@ -64,7 +63,7 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 Log.i(TAG,mMaxBehotTime);
-                getTouTiaoVideoDataByMaxBehotTime(mMaxBehotTime);
+                getYGVideoDataByMaxBehotTime(mMaxBehotTime);
             }
         });
         mSubscription = RxBus.getDefault().register(RotateScreenCommand.class, this)
@@ -90,9 +89,9 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
                 });
     }
 
-    private void getTouTiaoVideoDataByMaxBehotTime(final String maxBehotTime) {
+    private void getYGVideoDataByMaxBehotTime(final String maxBehotTime) {
         MovieManager.INSTANCE()
-                .getTouTiaoVideoDataByMaxBehotTime(maxBehotTime)
+                .getYGVideoDataByMaxBehotTime(maxBehotTime)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<YGMovieOriginalData>() {
@@ -114,9 +113,9 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
                 });
     }
 
-    private void getTouTiaoVideoDataByMinBehotTime() {
+    private void getYGVideoDataByMinBehotTime() {
         MovieManager.INSTANCE()
-                .getTouTiaoVideoDataByMinBehotTime()
+                .getYGVideoDataByMinBehotTime()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<YGMovieOriginalData>() {
@@ -142,4 +141,10 @@ public class RecommendVideoFragment extends com.trello.rxlifecycle.components.su
                 });
     }
 
+    @Override
+    public void onDestroy() {
+        if (!mSubscription.isUnsubscribed())
+            mSubscription.unsubscribe();
+        super.onDestroy();
+    }
 }

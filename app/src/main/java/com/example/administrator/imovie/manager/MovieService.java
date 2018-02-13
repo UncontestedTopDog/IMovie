@@ -193,7 +193,7 @@ public class MovieService {
         return retrofit.create(IMovieService.class).getXiGuaMovieOriginalDataByKeyword(format,autoload,count,keyword,cur_tab,offset);
     }
 
-    public static Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(String max_behot_time) {
+    public static Observable<YGMovieOriginalData> getYGVideoDataByMaxBehotTime(String max_behot_time) {
 
         String URL = "https://365yg.com/api/pc/";
         Retrofit retrofit = new Retrofit.Builder()
@@ -202,10 +202,10 @@ public class MovieService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        return retrofit.create(IMovieService.class).getTouTiaoVideoDataByMaxBehotTime(max_behot_time,"subv_movie");
+        return retrofit.create(IMovieService.class).getYGVideoDataByMaxBehotTime(max_behot_time,"subv_movie","movie");
     }
 
-    public static Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime() {
+    public static Observable<YGMovieOriginalData> getYGVideoDataByMinBehotTime() {
 
         String URL = "https://365yg.com/api/pc/";
         Retrofit retrofit = new Retrofit.Builder()
@@ -214,7 +214,7 @@ public class MovieService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        return retrofit.create(IMovieService.class).getTouTiaoVideoDataByMinBehotTime("0","movie");
+        return retrofit.create(IMovieService.class).getYGVideoDataByMinBehotTime("0","video_new","movie");
     }
 
 }

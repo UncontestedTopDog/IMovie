@@ -93,12 +93,12 @@ public class MovieManager {
         return MovieService.getXiGuaMovieOriginalDataByKeyword(keyword);
     }
 
-    public Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(@NonNull String max_behot_time) {
-        return MovieService.getTouTiaoVideoDataByMaxBehotTime(max_behot_time);
+    public Observable<YGMovieOriginalData> getYGVideoDataByMaxBehotTime(@NonNull String max_behot_time) {
+        return MovieService.getYGVideoDataByMaxBehotTime(max_behot_time);
     }
 
-    public Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime() {
-        return MovieService.getTouTiaoVideoDataByMinBehotTime();
+    public Observable<YGMovieOriginalData> getYGVideoDataByMinBehotTime() {
+        return MovieService.getYGVideoDataByMinBehotTime();
     }
 
 }

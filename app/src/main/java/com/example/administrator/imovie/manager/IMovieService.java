@@ -106,16 +106,17 @@ public interface IMovieService {
             @Query("offset") int offset
     );
 
-
     @GET("feed/")
-    Observable<YGMovieOriginalData> getTouTiaoVideoDataByMaxBehotTime(
+    Observable<YGMovieOriginalData> getYGVideoDataByMaxBehotTime(
             @Query("max_behot_time") String max_behot_time,
-            @Query("category") String category
+            @Query("category") String category,
+            @Query("utm_source") String source
     );
 
     @GET("feed/")
-    Observable<YGMovieOriginalData> getTouTiaoVideoDataByMinBehotTime(
+    Observable<YGMovieOriginalData> getYGVideoDataByMinBehotTime(
             @Query("min_behot_time") String min_behot_time,
-            @Query("category") String category
+            @Query("category") String category,
+            @Query("utm_source") String source
     );
 }

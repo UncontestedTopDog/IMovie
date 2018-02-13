@@ -17,7 +17,7 @@ public class YGMovieData {
         group_id = dataBean.getGroup_id() ;
         title = dataBean.getTitle() ;
         source  = dataBean.getSource() ;
-        share_url  = "https://www.ixigua.com/i"+group_id;
+        share_url  = "https://www.toutiao.com/group/"+group_id+"/";
         image_url  = dataBean.getImage_url() ;
         media_avatar_url  = dataBean.getMedia_avatar_url() ;
     }

@@ -40,7 +40,7 @@ public abstract class VideoPathDecoder {
                     @Override
                     public Observable<ResultResponse<VideoModel>> call(String response) {
                         Log.i(TAG,response);
-                        Pattern pattern = Pattern.compile("videoId: \'(.+)\'");
+                        Pattern pattern = Pattern.compile("videoid:\'(.+)\'");
                         Matcher matcher = pattern.matcher(response);
                         if (matcher.find()) {
                             String videoId = matcher.group(1);
@@ -63,17 +63,10 @@ public abstract class VideoPathDecoder {
                 .map(new Func1<ResultResponse<VideoModel>, Video>() {
                     @Override
                     public Video call(ResultResponse<VideoModel> videoModelResultResponse) {
-                        VideoModel.VideoListBean data = videoModelResultResponse.data.video_list;
+                        VideoModel.DataBean data = videoModelResultResponse.data.getData();
 
-                        if (data.video_3 != null) {
-                            return updateVideo(data.video_3);
-                        }
-                        if (data.video_2 != null) {
-                            return updateVideo(data.video_2);
-                        }
-                        if (data.video_1 != null) {
-                            return updateVideo(data.video_1);
-                        }
+                        if (data.getVideo_list().getVideo_1().getMain_url() != null)
+                            return updateVideo(data.getVideo_list().getVideo_1(),data.getPoster_url());
                         return null;
                     }
 
@@ -81,9 +74,10 @@ public abstract class VideoPathDecoder {
                         return new String(Base64.decode(base64.getBytes(), Base64.DEFAULT));
                     }
 
-                    private Video updateVideo(Video video) {
+                    private Video updateVideo(Video video , String poster_url) {
                         //base64解码
-                        video.main_url = getRealPath(video.main_url);
+                        video.setMain_url(getRealPath(video.getMain_url()));
+                        video.setPoster_url(poster_url);
                         return video;
                     }
                 })

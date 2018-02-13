@@ -16,6 +16,7 @@ import com.example.administrator.imovie.models.YGMovieData;
 import com.example.administrator.imovie.utils.RxBus;
 import com.example.administrator.imovie.utils.todaynewsvideo.Video;
 import com.example.administrator.imovie.utils.todaynewsvideo.VideoPathDecoder;
+import com.example.administrator.imovie.views.MovieDetailActivity;
 import com.example.administrator.imovie.views.common.CircularImageView;
 import com.example.administrator.imovie.views.common.NewJZVideoPlayerStandard;
 import cn.jzvd.JZVideoPlayer;
@@ -62,8 +63,8 @@ public class VideoListCard extends RelativeLayout {
         if (mYGMovieData == null)
             return false ;
         mVideoPlayer.setmMediaCreatorId(mYGMovieData.getGroup_id());
-//        if (mYGMovieData.getPlayer_url() == null)
-//            parseUrl(mYGMovieData);
+        if (mYGMovieData.getPlayer_url() == null)
+            parseUrl(mYGMovieData);
         Glide.with(getContext())
                 .load(mYGMovieData.getImage_url())
                 .centerCrop()
@@ -101,10 +102,23 @@ public class VideoListCard extends RelativeLayout {
         //解析地址
         VideoPathDecoder decoder = new VideoPathDecoder() {
             @Override
-            public void onSuccess(Video s) {
-                Log.i(TAG,s.toString());
-                mVideoPlayer.setUp(s.main_url, JZVideoPlayer.SCREEN_WINDOW_NORMAL, mYGMovieData.getTitle(),0);
-                mYGMovieData.setPlayer_url(s.main_url);
+            public void onSuccess(Video video) {
+                Log.i(TAG, video.toString());
+                mVideoPlayer.setUp(video.getMain_url(), JZVideoPlayer.SCREEN_WINDOW_NORMAL, mYGMovieData.getTitle(), 0);
+                Glide.with(getContext())
+                        .load(video.getPoster_url())
+                        .centerCrop()
+                        .placeholder(R.drawable.no_pictrue)
+                        .error(R.drawable.download_fail_hint)
+                        .crossFade()
+                        .into(new GlideDrawableImageViewTarget(mVideoPlayer.thumbImageView) {
+                                  @Override
+                                  public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
+                                      super.onResourceReady(drawable, anim);
+                                  }
+                              }
+                        );
+                mYGMovieData.setPlayer_url(video.getMain_url());
             }
 
             @Override
